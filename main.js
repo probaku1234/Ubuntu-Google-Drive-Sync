@@ -75,9 +75,11 @@ app.whenReady().then(() => {
                    process.env.USERPROFILE) + '/.credentials/';
   var TOKEN_PATH = TOKEN_DIR + 'drive-nodejs-quickstart.json';
   
+  var apiKeys = JSON.parse(fs.readFileSync('config.json'));
+  
   var oauth2Client = new OAuth2(
-    "605719196691-6a9bgvhq3lbjcocm62i56rhkg6uikoh6.apps.googleusercontent.com", //< CLIENT_ID >
-    "tE2d6a-xRAu8TYlj2z0dCpu6", // < SECRET_ID >
+    apiKeys['CLIENT_ID'], //< CLIENT_ID >
+    apiKeys['SECRET_ID'], // < SECRET_ID >
     "http://localhost:8080" // addr of our web server that will be listening
   );
   
