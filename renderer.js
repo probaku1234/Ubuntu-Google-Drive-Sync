@@ -8,7 +8,6 @@ window.$ = window.jQuery = require('jquery');
 const {ipcRenderer} = require('electron');
 const { dialog } = require('electron').remote
 const GoogleDriveSyn = require('./GoogleDriveSyn');
-console.log(GoogleDriveSyn);
 
 var googleSyn;
 var directory = localStorage.getItem('directory') ? localStorage.getItem('directory') : undefined;
@@ -39,13 +38,11 @@ ipcRenderer.on('load-files', function(event, data) {
     console.log('received data');
 
     $.each(data, function(index ,value) {
-        $('#folder_list').append('<div>' + value['name'] + '</div>');
+        $('#folder_list').append('<button type="button" class="list-group-item list-group-item-action">' + value['name'] + '</button>');
     });
 });
 
 ipcRenderer.on('auth', function(event, data) {
-    console.log(data);
-
     googleSyn = new GoogleDriveSyn(data);
-    googleSyn.getAllFilesInFolder('0B2k9Kxcv0FOZR2Fhc21Mc1Z0VEU');
+    //googleSyn.getAllFilesInFolder('0B2k9Kxcv0FOZR2Fhc21Mc1Z0VEU');
 });

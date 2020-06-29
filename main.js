@@ -98,7 +98,7 @@ app.whenReady().then(() => {
       if (files.length == 0) {
         console.log('No files found.');
       } else {
-        mainWindow.send('auth', auth);
+        mainWindow.send('auth', auth.credentials);
         mainWindow.send('load-files', files, auth.credentials.access_token);
         console.log(files);
       }
