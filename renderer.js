@@ -11,6 +11,7 @@ const GoogleDriveSyn = require('./GoogleDriveSyn');
 
 var googleSyn;
 var directory = localStorage.getItem('directory') ? localStorage.getItem('directory') : undefined;
+var driveFolderId = localStorage.getItem('driveFolderId') ? localStorage.getItem('driveFolderId') : undefined;
 
 if (directory != undefined) {
     $('#folder_path').val(directory);
@@ -34,11 +35,34 @@ $('#change_folder_button').click(function () {
     });
 });
 
+$(function() {
+    $('#toggle-event').on('change', function() {
+        var isChecked = $(this).prop('checked')
+        console.log(isChecked);
+        
+        if (isChecked) {
+            $('#checkbox-p').html('Sync On');
+        } else {
+            $('#checkbox-p').html('Sync Off');
+        }
+    });
+});
+
+function onToggleChange() {
+    console.log('qwe');
+}
+
 ipcRenderer.on('load-files', function(event, data) {
     console.log('received data');
 
     $.each(data, function(index ,value) {
-        $('#folder_list').append('<button type="button" class="list-group-item list-group-item-action">' + value['name'] + '</button>');
+        if (driveFolderId != undefined) {
+            if (value['id'] == driveFolderId) {
+                $('#folder_list').append('<button type="button" class="list-group-item list-group-item-action active">' + value['name'] + '</button>');
+            }
+        } else {
+            $('#folder_list').append('<button type="button" class="list-group-item list-group-item-action">' + value['name'] + '</button>');
+        }
     });
 });
 

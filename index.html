@@ -6,12 +6,26 @@
     <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://docs.google.com; default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Hello World!</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
   </head>
   <body>
     <style>
-      @import url('./node_modules/bootstrap/dist/css/bootstrap.min.css');
+      @import url('./node_modules/bootstrap4-toggle/css/bootstrap4-toggle.min.css');
       #folder_list {
         margin: 20px;
+      }
+
+      .checkbox {
+        margin: 20px;
+      }
+
+      #checkbox-p {
+        display: inline;
       }
     </style>
     <h1>Hello World!</h1>
@@ -27,8 +41,26 @@
         </div>
     </div>
     <h2>Folders in Your Drive</h2>
-    <ul id='folder_list' class="list-group"></ul>
+    <div>
+      <h3>Choose One Folder</h3>
+      <ul id='folder_list' class="list-group"></ul>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" data-toggle="toggle" data-onstyle="success" id="toggle-event">
+          <p id="checkbox-p"></p>
+        </label>
+      </div>
+    </div>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
+    <script>
+      //document.getElementById('toggle-event').onchange = function() {onToggleChange()};
+      $(document).on('touch.bs.toggle click.bs.toggle', 'div[data-toggle^=toggle]', function (e) {
+          var $checkbox = $(this).find('input[type=checkbox]')
+          //$checkbox.bootstrapToggle('toggle')
+          $checkbox.trigger("change")    // <!-- Added line
+          e.preventDefault()
+      })
+    </script>
   </body>
 </html>
