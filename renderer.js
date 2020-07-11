@@ -68,5 +68,5 @@ ipcRenderer.on('load-files', function(event, data) {
 
 ipcRenderer.on('auth', function(event, data) {
     googleSyn = new GoogleDriveSyn(data);
-    //googleSyn.getAllFilesInFolder('0B2k9Kxcv0FOZR2Fhc21Mc1Z0VEU');
+    googleSyn.getAllFilesInFolder('1Op7sdBdrOEEEedlxqPeaR8PQFGa29wCn');
 });
